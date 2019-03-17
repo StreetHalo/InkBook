@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">InkBook</string>
+    <string name="search_icon">Поиск</string>
+    <string name="favorite_icon">Избранное</string>
+    <string name="like">Сохранение фото на телефон</string>
+    <string name="share">Поделиться фото</string>
+    <string name="logo">Логотип</string>
+    <string name="hint">Что будем набивать?</string>
+    <string name="found_img">Найденное изображение</string>
+    <string name="fav_icon">Избранное</string>
+</resources>
