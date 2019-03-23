@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.fav_gallery_fragment.*
 import javax.inject.Inject
 import android.view.*
 import android.view.MenuInflater
+import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.tattoosearch.ui.MainActivity
 
 
@@ -23,8 +24,16 @@ class FavFragment: MvpAppCompatFragment(), FavViewInterface {
 
     @Inject
     lateinit var adapter: FavAdapter
+    @Inject
     @InjectPresenter
     lateinit var presenter: FavPresenter
+
+    @ProvidePresenter
+    internal fun providePresenter(): FavPresenter {
+        return presenter
+    }
+
+
     lateinit var  gridLayoutManager:GridLayoutManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -33,8 +42,8 @@ class FavFragment: MvpAppCompatFragment(), FavViewInterface {
     }
 
     override fun onAttach(context: Context?) {
-        super.onAttach(context)
         App.daggerMainComponent.inject(this)
+        super.onAttach(context)
         adapter.setView(this)
         setHasOptionsMenu(true)
 

@@ -21,18 +21,10 @@ interface MainComponent {
 
     fun inject(fragment: GalleryFragment)
 
-    fun inject(presenter: SearchPresenter)
-
-    fun inject(presenter: ImgPresenter)
-
     fun inject(app: ImageActivity)
 
     fun inject(app: FavFragment)
 
-    fun inject(app: FavPresenter)
-
     fun inject(app: ImageFavActivity)
-
-    fun inject(app: FavItemPresenter)
 
 }

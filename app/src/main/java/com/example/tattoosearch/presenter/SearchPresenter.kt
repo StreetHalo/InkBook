@@ -8,28 +8,24 @@ import com.example.tattoosearch.jsonModel.Item
 import com.example.tattoosearch.models.ConnectModel
 import com.example.tattoosearch.models.Image
 import com.example.tattoosearch.ui.search.gallery.SearchViewInterface
-import javax.inject.Inject
 
 
 @InjectViewState
-class SearchPresenter : MvpPresenter<SearchViewInterface>(),SearchInterface {
+class SearchPresenter(private val connectModel: ConnectModel) : MvpPresenter<SearchViewInterface>(),SearchInterface {
 
-
-    @Inject
-    lateinit var connectModel: ConnectModel
     private var listItem:ArrayList<Item> = ArrayList()
     private var scrollPosition = 0
     private var num = 1
     private var query = "null"
+
      init {
-            App.daggerMainComponent.inject(this)
             connectModel.setPresenterInterface(this)
      }
 
 
 
 override fun setConnect(query: String) {
-        if(num<20) {
+        if(num<99) {
             connectModel.getArrayImg(query, num)
             num += 11
         }

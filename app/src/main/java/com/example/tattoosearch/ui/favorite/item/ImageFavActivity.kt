@@ -20,7 +20,9 @@ import android.provider.MediaStore
 import android.support.v7.app.AlertDialog
 import android.view.View
 import android.widget.Toast
+import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.tattoosearch.PATH_FOR_IMG
+import com.example.tattoosearch.presenter.ImgPresenter
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 import kotlinx.android.synthetic.main.recycler_adapter_img.*
@@ -35,15 +37,20 @@ class ImageFavActivity : MvpAppCompatActivity(),ImgFavInterface,
     @Inject
     lateinit var adapter: ImgFavAdapter
     private var listImg = arrayListOf<String>()
+    @Inject
     @InjectPresenter
     lateinit var presenter: FavItemPresenter
+    @ProvidePresenter
+    internal fun providePresenter(): FavItemPresenter {
+        return presenter
+    }
     private var position = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        App.daggerMainComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image)
-        App.daggerMainComponent.inject(this)
         button_1.setImageResource(R.drawable.ic_delete_black_24dp)
 
         listImg =  intent.getStringArrayListExtra("imgSavedList")

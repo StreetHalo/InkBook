@@ -5,7 +5,6 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         tools:context=".ui.MainActivity"
         >
 
@@ -19,7 +18,9 @@
             android:background="?attr/colorPrimary"
             android:theme="?attr/actionBarTheme"
             android:minHeight="?attr/actionBarSize"
-            android:id="@+id/toolbar" app:subtitleTextColor="@color/white" app:titleTextColor="@color/white"/>
+            android:id="@+id/toolbar"
+            app:subtitleTextColor="@color/white"
+            app:titleTextColor="@color/white"/>
     <com.miguelcatalan.materialsearchview.MaterialSearchView
             android:id="@+id/search_view"
             android:layout_width="match_parent"

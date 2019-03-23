@@ -19,6 +19,16 @@ import com.example.tattoosearch.ui.favorite.gallery.FavFragment
 import com.example.tattoosearch.ui.search.gallery.GalleryFragment
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main.*
+import android.R.id.edit
+import android.content.SharedPreferences
+import android.content.DialogInterface
+import android.text.Html
+import android.widget.CheckBox
+import android.R.id.checkbox
+import android.support.v7.app.AlertDialog
+import android.view.LayoutInflater
+
+
 
 class MainActivity : MvpAppCompatActivity() {
 
@@ -30,7 +40,8 @@ class MainActivity : MvpAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         App.daggerMainComponent.inject(this)
-            }
+
+    }
 
     override fun onResume() {
         super.onResume()

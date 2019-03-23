@@ -26,6 +26,8 @@ import android.graphics.drawable.Drawable
 import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
+import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.example.tattoosearch.presenter.FavPresenter
 import com.squareup.picasso.Target
 
 
@@ -37,21 +39,27 @@ class ImageActivity : MvpAppCompatActivity(), ImageViewInterface,
     private var listImg = arrayListOf<Image>()
     @Inject
     lateinit var adapter: ImgAdapter
+
+    @Inject
     @InjectPresenter
     lateinit var presenter: ImgPresenter
+
+    @ProvidePresenter
+    internal fun providePresenter(): ImgPresenter {
+        return presenter
+    }
+
     private var position = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        App.daggerMainComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image)
-        App.daggerMainComponent.inject(this)
-
 
         listImg =  intent.getParcelableArrayListExtra("imgList")
         position = intent.getIntExtra("clickPosition",0)
         adapter.addItems(listImg)
-
         presenter.setImgList(listImg)
         presenter.setPosition(position)
         presenter.setButtonTheme()

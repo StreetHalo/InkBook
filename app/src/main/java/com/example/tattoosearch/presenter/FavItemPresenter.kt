@@ -5,20 +5,16 @@ import com.arellomobile.mvp.MvpPresenter
 import com.example.tattoosearch.App
 import com.example.tattoosearch.models.FolderManager
 import com.example.tattoosearch.ui.favorite.item.ImgFavInterface
-import com.example.tattoosearch.ui.search.image.ImageViewInterface
 import javax.inject.Inject
 
 @InjectViewState
 
-class FavItemPresenter: MvpPresenter<ImgFavInterface>(),ImgInterface {
+class FavItemPresenter(private val folderManager: FolderManager) : MvpPresenter<ImgFavInterface>(),ImgInterface {
 
-    @Inject
-    lateinit var folderManager: FolderManager
     private var scrollPosition = 0
 
 
     init {
-        App.daggerMainComponent.inject(this)
         folderManager.setPresenterInterface(this)
     }
 

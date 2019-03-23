@@ -8,4 +8,6 @@
     <string name="hint">Что будем набивать?</string>
     <string name="found_img">Найденное изображение</string>
     <string name="fav_icon">Избранное</string>
+    <string name="oops">К сожалению, данное приложение является тестовым и имеет ограниченное количество запросов.
+                        Повторите попытку позже да <a href="https://www.youtube.com/watch?v=vlSR8Wlmpac">послушайте музыку</a> </string>
 </resources>

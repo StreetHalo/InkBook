@@ -3,6 +3,7 @@ package com.example.tattoosearch.dagger
 import com.example.tattoosearch.URL
 import com.example.tattoosearch.ui.search.gallery.GalleryAdapter
 import com.example.tattoosearch.models.ConnectModel
+import com.example.tattoosearch.presenter.SearchPresenter
 import com.example.tattoosearch.ui.favorite.gallery.FavAdapter
 import com.example.tattoosearch.ui.favorite.item.ImgFavAdapter
 import dagger.Module
@@ -39,5 +40,10 @@ open class SearchModule() {
     @Provides
     fun     provideImgFavGalleryAdapter(): ImgFavAdapter {
         return ImgFavAdapter()
+    }
+
+    @Provides
+    fun     provideSearchPresenter(connectModel: ConnectModel): SearchPresenter {
+        return SearchPresenter(connectModel)
     }
     }

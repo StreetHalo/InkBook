@@ -10,10 +10,12 @@ import android.view.ViewGroup
 import com.example.tattoosearch.R
 import kotlinx.android.synthetic.main.gallery_fragment.*
 import android.support.v7.widget.RecyclerView
+import android.text.method.LinkMovementMethod
 import android.util.Log
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.tattoosearch.App
 import com.example.tattoosearch.HORIZONTAL_ORIENTATION
 import com.example.tattoosearch.jsonModel.Item
@@ -30,11 +32,19 @@ class GalleryFragment : MvpAppCompatFragment(), SearchViewInterface {
 
     @Inject
     lateinit var adapter: GalleryAdapter
+    @Inject
     @InjectPresenter
     lateinit var presenter: SearchPresenter
+
+    @ProvidePresenter
+    internal fun providePresenter(): SearchPresenter {
+        return presenter
+    }
+
     var query = "null"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         return inflater.inflate(R.layout.gallery_fragment,container,false)
     }
 
@@ -42,6 +52,12 @@ class GalleryFragment : MvpAppCompatFragment(), SearchViewInterface {
         App.daggerMainComponent.inject(this)
         adapter.setView(this)
         super.onAttach(context)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        oops.movementMethod = LinkMovementMethod.getInstance()
+
     }
 
     override fun setClickPosition(clickPosition: Int) {
@@ -56,7 +72,7 @@ class GalleryFragment : MvpAppCompatFragment(), SearchViewInterface {
 
     override fun errorSearch() {
         progress_bar.visibility = View.INVISIBLE
-        Toast.makeText(context,"Ошибка поиска",Toast.LENGTH_LONG).show()
+        oops.visibility = View.VISIBLE
     }
 
     override fun setItems(items: ArrayList<Item>) {
