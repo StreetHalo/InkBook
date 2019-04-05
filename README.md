@@ -6,10 +6,10 @@ Search sketches and inspiration for your future tattooes.
 For search images using Custom Search API.
 
 ### Libraries
- Views:
-[PhotoView](https://github.com/chrisbanes/PhotoView),
+ Views:<br />
+* [PhotoView](https://github.com/chrisbanes/PhotoView),
 [DiscreteScrollView](https://github.com/yarolegovich/DiscreteScrollView),
-[MaterialSearchView](https://github.com/MiguelCatalan/MaterialSearchView).
+[MaterialSearchView](https://github.com/MiguelCatalan/MaterialSearchView).<br />
 
 
 For work with HTTP requests, MVP pattern and dependency injections:<br />
