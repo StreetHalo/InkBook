@@ -6,7 +6,7 @@ Search sketches and inspiration for your future tattooes.
 For search images using Custom Search API.
 
 ### Libraries
-Views:
+ Views:
 [PhotoView](https://github.com/chrisbanes/PhotoView),
 [DiscreteScrollView](https://github.com/yarolegovich/DiscreteScrollView),
 [MaterialSearchView](https://github.com/MiguelCatalan/MaterialSearchView).
