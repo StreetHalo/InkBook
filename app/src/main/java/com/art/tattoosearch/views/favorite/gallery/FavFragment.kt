@@ -1,4 +1,4 @@
-package com.art.tattoosearch.ui.favorite.gallery
+package com.art.tattoosearch.views.favorite.gallery
 
 import android.content.Context
 import android.content.Intent
@@ -11,13 +11,13 @@ import com.art.tattoosearch.App
 import com.art.tattoosearch.HORIZONTAL_ORIENTATION
 import com.art.tattoosearch.R
 import com.art.tattoosearch.presenter.FavPresenter
-import com.art.tattoosearch.ui.favorite.item.ImageFavActivity
+import com.art.tattoosearch.views.favorite.item.ImageFavActivity
 import kotlinx.android.synthetic.main.fav_gallery_fragment.*
 import javax.inject.Inject
 import android.view.*
 import android.view.MenuInflater
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.art.tattoosearch.ui.MainActivity
+import com.art.tattoosearch.views.MainActivity
 
 
 class FavFragment: MvpAppCompatFragment(), FavViewInterface {

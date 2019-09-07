@@ -1,11 +1,11 @@
 package com.art.tattoosearch.dagger
 
 import com.art.tattoosearch.URL
-import com.art.tattoosearch.ui.search.gallery.GalleryAdapter
+import com.art.tattoosearch.views.search.gallery.GalleryAdapter
 import com.art.tattoosearch.models.ConnectModel
 import com.art.tattoosearch.presenter.SearchPresenter
-import com.art.tattoosearch.ui.favorite.gallery.FavAdapter
-import com.art.tattoosearch.ui.favorite.item.ImgFavAdapter
+import com.art.tattoosearch.views.favorite.gallery.FavAdapter
+import com.art.tattoosearch.views.favorite.item.ImgFavAdapter
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit

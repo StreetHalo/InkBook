@@ -1,4 +1,4 @@
-package com.art.tattoosearch.ui
+package com.art.tattoosearch.views
 
 import android.Manifest
 import android.content.Context
@@ -14,8 +14,8 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.art.tattoosearch.*
-import com.art.tattoosearch.ui.favorite.gallery.FavFragment
-import com.art.tattoosearch.ui.search.gallery.GalleryFragment
+import com.art.tattoosearch.views.favorite.gallery.FavFragment
+import com.art.tattoosearch.views.search.gallery.GalleryFragment
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main.*
 

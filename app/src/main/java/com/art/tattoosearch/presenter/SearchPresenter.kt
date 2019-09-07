@@ -6,7 +6,7 @@ import com.art.tattoosearch.SEARCH_WORD
 import com.art.tattoosearch.jsonModel.Item
 import com.art.tattoosearch.models.ConnectModel
 import com.art.tattoosearch.models.Image
-import com.art.tattoosearch.ui.search.gallery.SearchViewInterface
+import com.art.tattoosearch.views.search.gallery.SearchViewInterface
 
 
 @InjectViewState

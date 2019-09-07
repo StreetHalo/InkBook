@@ -1,4 +1,4 @@
-package com.art.tattoosearch.ui.search.gallery
+package com.art.tattoosearch.views.search.gallery
 
 
 import android.support.v7.widget.RecyclerView

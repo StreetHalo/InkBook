@@ -1,4 +1,4 @@
-package com.art.tattoosearch.ui.search.gallery
+package com.art.tattoosearch.views.search.gallery
 
 import android.content.Context
 import android.content.Intent
@@ -18,7 +18,7 @@ import com.art.tattoosearch.App
 import com.art.tattoosearch.HORIZONTAL_ORIENTATION
 import com.art.tattoosearch.jsonModel.Item
 import com.art.tattoosearch.presenter.SearchPresenter
-import com.art.tattoosearch.ui.search.image.ImageActivity
+import com.art.tattoosearch.views.search.image.ImageActivity
 import javax.inject.Inject
 import android.content.DialogInterface
 import android.support.v7.app.AlertDialog

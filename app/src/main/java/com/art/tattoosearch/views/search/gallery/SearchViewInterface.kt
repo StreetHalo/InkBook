@@ -1,4 +1,4 @@
-package com.art.tattoosearch.ui.search.gallery
+package com.art.tattoosearch.views.search.gallery
 
 import com.arellomobile.mvp.MvpView
 import com.art.tattoosearch.jsonModel.Item

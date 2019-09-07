@@ -8,7 +8,7 @@ import com.arellomobile.mvp.MvpPresenter
 import com.art.tattoosearch.models.FolderManager
 import com.art.tattoosearch.models.Image
 import com.art.tattoosearch.models.SavingImg
-import com.art.tattoosearch.ui.search.image.ImageViewInterface
+import com.art.tattoosearch.views.search.image.ImageViewInterface
 import com.squareup.picasso.Picasso
 
 @InjectViewState

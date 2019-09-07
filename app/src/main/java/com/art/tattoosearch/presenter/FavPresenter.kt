@@ -3,7 +3,7 @@ package com.art.tattoosearch.presenter
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.art.tattoosearch.models.FolderManager
-import com.art.tattoosearch.ui.favorite.gallery.FavViewInterface
+import com.art.tattoosearch.views.favorite.gallery.FavViewInterface
 
 @InjectViewState
 class FavPresenter(private val folderManager: FolderManager) : MvpPresenter<FavViewInterface>() {

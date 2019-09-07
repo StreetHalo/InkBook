@@ -1,4 +1,4 @@
-package com.art.tattoosearch.ui.favorite.gallery
+package com.art.tattoosearch.views.favorite.gallery
 
 import com.arellomobile.mvp.MvpView
 

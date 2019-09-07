@@ -1,5 +1,7 @@
 package com.art.tattoosearch.models
 
+import API_KEY
+import SEARCH_ID
 import com.art.tattoosearch.*
 import com.art.tattoosearch.presenter.SearchInterface
 import com.art.tattoosearch.jsonModel.Example

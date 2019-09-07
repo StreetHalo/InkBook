@@ -10,4 +10,7 @@
     <string name="fav_icon">Избранное</string>
     <string name="oops">К сожалению, данное приложение является тестовым и имеет ограниченное количество запросов.
                         Повторите попытку позже, а что бы Вам не было скучно, можно <a href="https://www.youtube.com/watch?v=vlSR8Wlmpac">послушать музыку</a> </string>
+    <string name="need_permissions">Для дальнейшей работы необходимо разрешение</string>
+    <string name="splash_error">Произошла ошибка. Перезапустите приложение.</string>
+
 </resources>

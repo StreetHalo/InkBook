@@ -3,7 +3,7 @@ package com.art.tattoosearch.presenter
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.art.tattoosearch.models.FolderManager
-import com.art.tattoosearch.ui.favorite.item.ImgFavInterface
+import com.art.tattoosearch.views.favorite.item.ImgFavInterface
 
 @InjectViewState
 
@@ -12,9 +12,7 @@ class FavItemPresenter(private val folderManager: FolderManager) : MvpPresenter<
     private var scrollPosition = 0
 
 
-    init {
-        folderManager.setPresenterInterface(this)
-    }
+
 
 
 

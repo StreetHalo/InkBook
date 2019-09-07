@@ -1,4 +1,4 @@
-package com.art.tattoosearch.ui.search.image
+package com.art.tattoosearch.views.search.image
 
 import com.arellomobile.mvp.MvpView
 

@@ -1,19 +1,18 @@
-package com.art.tattoosearch.ui.favorite.item
+package com.art.tattoosearch.views.search.image
 
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.art.tattoosearch.PATH_FOR_IMG
 import com.art.tattoosearch.R
+import com.art.tattoosearch.models.Image
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.recycler_adapter_img.view.*
-import java.io.File
 
-class ImgFavAdapter: RecyclerView.Adapter<ImgFavAdapter.PhotoHolder>() {
+class ImgAdapter: RecyclerView.Adapter<ImgAdapter.PhotoHolder>() {
 
-    lateinit var listItems:ArrayList<String>
+    lateinit var listItems:ArrayList<Image>
 
     override fun onCreateViewHolder(parent: ViewGroup, type: Int): PhotoHolder {
 
@@ -25,7 +24,7 @@ class ImgFavAdapter: RecyclerView.Adapter<ImgFavAdapter.PhotoHolder>() {
         return listItems.size
     }
 
-    fun addItems(items:ArrayList<String>){
+    fun addItems(items:ArrayList<Image>){
         listItems = items
         notifyDataSetChanged()
     }
@@ -34,11 +33,7 @@ class ImgFavAdapter: RecyclerView.Adapter<ImgFavAdapter.PhotoHolder>() {
         listItems.clear()
     }
 
-    fun removeItem(position: Int){
-        listItems.removeAt(position)
-        notifyDataSetChanged()
 
-    }
 
     override fun onBindViewHolder(holder: PhotoHolder, position: Int) {
         holder.setImg(listItems[position])
@@ -46,13 +41,16 @@ class ImgFavAdapter: RecyclerView.Adapter<ImgFavAdapter.PhotoHolder>() {
 
 
     inner class PhotoHolder(itemView: View) : ViewHolder(itemView) {
-        fun  setImg(item: String){
+        fun  setImg(item: Image){
 
 
             Picasso
                 .with(itemView.context)
-                .load(object :File("$PATH_FOR_IMG/$item"){})
+                .load(item.imgUrl)
+
                 .into(itemView.item_image_view)
+
+
         }
     }
 }

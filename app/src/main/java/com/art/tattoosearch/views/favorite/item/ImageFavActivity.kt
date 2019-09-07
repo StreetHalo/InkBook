@@ -1,4 +1,4 @@
-package com.art.tattoosearch.ui.favorite.item
+package com.art.tattoosearch.views.favorite.item
 
 import android.os.Bundle
 import com.arellomobile.mvp.MvpAppCompatActivity
