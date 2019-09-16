@@ -1,8 +1,8 @@
-package com.art.tattoosearch.jsonModel
+package com.art.tattoosearch.entities
 
 import java.util.HashMap
 
-class Request {
+class NextPage {
 
     var title: String? = null
     var totalResults: String? = null

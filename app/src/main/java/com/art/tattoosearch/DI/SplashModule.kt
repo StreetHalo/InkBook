@@ -1,6 +1,6 @@
-package com.art.tattoosearch.dagger
+package com.art.tattoosearch.DI
 
-import com.art.tattoosearch.models.FolderManager
+import com.art.tattoosearch.repository.FolderManager
 import com.art.tattoosearch.views.splash.SplashPresenter
 import dagger.Module
 import dagger.Provides

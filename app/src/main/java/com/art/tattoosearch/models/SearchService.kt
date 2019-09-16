@@ -1,6 +1,7 @@
 package com.art.tattoosearch.models
 
-import com.art.tattoosearch.jsonModel.Example
+import com.art.tattoosearch.entities.Example
+import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -13,5 +14,5 @@ interface SearchService {
                @Query("filter") filter: Int,
                @Query("imgSize") size: String,
                @Query("searchType")searchType:String,
-               @Query ("key")key:String): Call<Example>
+               @Query ("key")key:String): Observable<Example>
 }

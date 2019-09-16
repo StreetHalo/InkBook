@@ -1,16 +1,11 @@
-package com.art.tattoosearch.jsonModel
+package com.art.tattoosearch.entities
 
 import java.util.HashMap
 
-class Image {
+class Url {
 
-    var contextLink: String? = null
-    var height: Int? = null
-    var width: Int? = null
-    var byteSize: Int? = null
-    var thumbnailLink: String? = null
-    var thumbnailHeight: Int? = null
-    var thumbnailWidth: Int? = null
+    var type: String? = null
+    var template: String? = null
     private val additionalProperties = HashMap<String, Any>()
 
     fun getAdditionalProperties(): Map<String, Any> {

@@ -1,11 +1,13 @@
-package com.art.tattoosearch.jsonModel
+package com.art.tattoosearch.entities
 
 import java.util.HashMap
 
-class Queries {
+class SearchInformation {
 
-    var request: List<Request>? = null
-    var nextPage: List<NextPage>? = null
+    var searchTime: Double? = null
+    var formattedSearchTime: String? = null
+    var totalResults: String? = null
+    var formattedTotalResults: String? = null
     private val additionalProperties = HashMap<String, Any>()
 
     fun getAdditionalProperties(): Map<String, Any> {

@@ -1,10 +1,10 @@
-package com.art.tattoosearch.models
+package com.art.tattoosearch.entities
 
 import android.os.Parcel
 import android.os.Parcelable
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-open class Image(var imgUrl:String, var isLiked:Int, val thumbnailLink:String) :Parcelable{
+open class ImageForView(var imgUrl:String, var isLiked:Int, val thumbnailLink:String) :Parcelable{
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readInt(),
@@ -22,12 +22,12 @@ open class Image(var imgUrl:String, var isLiked:Int, val thumbnailLink:String) :
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<Image> {
-        override fun createFromParcel(parcel: Parcel): Image {
-            return Image(parcel)
+    companion object CREATOR : Parcelable.Creator<ImageForView> {
+        override fun createFromParcel(parcel: Parcel): ImageForView {
+            return ImageForView(parcel)
         }
 
-        override fun newArray(size: Int): Array<Image?> {
+        override fun newArray(size: Int): Array<ImageForView?> {
             return arrayOfNulls(size)
         }
     }

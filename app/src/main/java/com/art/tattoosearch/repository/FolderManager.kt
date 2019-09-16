@@ -1,9 +1,6 @@
-package com.art.tattoosearch.models
+package com.art.tattoosearch.repository
 
-import android.os.Environment
-import android.util.Log
 import com.art.tattoosearch.PATH_FOR_IMG
-import com.art.tattoosearch.presenter.ImgInterface
 import java.io.File
 
 class FolderManager() {
@@ -12,9 +9,7 @@ class FolderManager() {
     fun getSavedPics(): ArrayList<String> {
         savedPics.clear()
         val folder = File(PATH_FOR_IMG)
-
         if (!folder.exists()) createFolder(PATH_FOR_IMG)
-
         else {
             for (file in folder.listFiles()) {
                 savedPics.add(file.name)
@@ -23,22 +18,19 @@ class FolderManager() {
         return savedPics
     }
 
-    fun delSavedPic(id: Int) {
-
-        val delPic = File(PATH_FOR_IMG+"/"+ savedPics[id])
-            delPic.delete()
+    fun delSavedPic(name: String): Boolean {
+        val delPic = File("$PATH_FOR_IMG/$name")
+        return delPic.delete()
     }
 
-    fun createFolder(path:String): Boolean {
+    fun createFolder(path: String): Boolean {
         var isCreateFolder = false
         val folder = File(path)
         if (!folder.exists()) {
             isCreateFolder = folder.mkdir()
-        }
-        else isCreateFolder = true
+        } else isCreateFolder = true
 
         return isCreateFolder
-
     }
 }
 

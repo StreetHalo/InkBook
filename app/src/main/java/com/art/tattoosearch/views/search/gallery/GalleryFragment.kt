@@ -1,5 +1,6 @@
 package com.art.tattoosearch.views.search.gallery
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -16,8 +17,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.art.tattoosearch.App
 import com.art.tattoosearch.HORIZONTAL_ORIENTATION
-import com.art.tattoosearch.jsonModel.Item
-import com.art.tattoosearch.presenter.SearchPresenter
+import com.art.tattoosearch.entities.Item
 import com.art.tattoosearch.views.search.image.ImageActivity
 import javax.inject.Inject
 import android.content.DialogInterface
@@ -25,13 +25,12 @@ import android.support.v7.app.AlertDialog
 import android.util.TypedValue
 import android.view.Gravity
 import android.widget.TextView
-
+import com.art.tattoosearch.SEARCH_ITEM
+import com.art.tattoosearch.views.main.MainActivity
 
 class GalleryFragment : MvpAppCompatFragment(), SearchViewInterface {
 
-    private val TAG = this.javaClass.simpleName
-    private var searchFlag = false
-    lateinit var  gridLayoutManager:GridLayoutManager
+    lateinit var gridLayoutManager: GridLayoutManager
 
     @Inject
     lateinit var adapter: GalleryAdapter
@@ -46,37 +45,42 @@ class GalleryFragment : MvpAppCompatFragment(), SearchViewInterface {
 
     var query = "null"
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-        return inflater.inflate(R.layout.gallery_fragment,container,false)
+        return inflater.inflate(R.layout.gallery_fragment, container, false)
     }
 
     override fun onAttach(context: Context?) {
         App.daggerMainComponent.inject(this)
         adapter.setView(this)
+        //presenter.setQuery(arguments!!.getString("query"))
         super.onAttach(context)
     }
 
     override fun onResume() {
         super.onResume()
-
+        (activity as MainActivity).supportActionBar!!.title = SEARCH_ITEM
+        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        (activity as MainActivity).supportActionBar!!.setDisplayShowHomeEnabled(true)
     }
 
     override fun setClickPosition(clickPosition: Int) {
-
         val intent = Intent(activity, ImageActivity::class.java)
-        intent.putExtra("clickPosition",clickPosition)
+        intent.putExtra("clickPosition", clickPosition)
         intent.putExtra("imgList", presenter.getImgList())
         startActivity(intent)
-
     }
 
 
     override fun errorSearch() {
         progress_bar.visibility = View.INVISIBLE
-        val message =  TextView(context);
-        message.setTextSize(TypedValue.COMPLEX_UNIT_SP,18f)
-        message.setPadding(40,40,40,40)
+        val message = TextView(context);
+        message.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
+        message.setPadding(40, 40, 40, 40)
         message.gravity = Gravity.LEFT
         message.text = context!!.getText(R.string.oops);
         message.movementMethod = LinkMovementMethod.getInstance();
@@ -87,29 +91,34 @@ class GalleryFragment : MvpAppCompatFragment(), SearchViewInterface {
             .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, id ->
                 dialog.cancel()
             })
-         builder.create()
+        builder.create()
         builder.show()
 
     }
 
     override fun setItems(items: ArrayList<Item>) {
+
         progress_bar.visibility = View.INVISIBLE
         adapter.addItems(items)
         photo_recycler_view.scrollToPosition(presenter.getScrollPosition())
     }
+
+    override fun onStart() {
+        super.onStart()
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-
-        if(searchFlag) presenter.setQuery(query)
-
-        if (activity!!.resources.configuration.orientation == HORIZONTAL_ORIENTATION)
-            gridLayoutManager  = GridLayoutManager(activity, 4)
-        else
-            gridLayoutManager = GridLayoutManager(activity, 2)
+        presenter.setQuery(arguments!!.getString("query"))
+        arguments!!.putString("query", "")
+        gridLayoutManager =
+            if (activity!!.resources.configuration.orientation == HORIZONTAL_ORIENTATION)
+                GridLayoutManager(activity, 4)
+            else
+                GridLayoutManager(activity, 2)
 
         photo_recycler_view.layoutManager = gridLayoutManager
-
         photo_recycler_view.adapter = adapter
-        photo_recycler_view.addOnScrollListener(object :RecyclerView.OnScrollListener(){
+        photo_recycler_view.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 presenter.setScrollPosition(gridLayoutManager.findLastVisibleItemPosition())
@@ -123,14 +132,21 @@ class GalleryFragment : MvpAppCompatFragment(), SearchViewInterface {
         super.onActivityCreated(savedInstanceState)
     }
 
-    fun firstSearch(query:String){
-        searchFlag = true
-        this.query = query
+
+    override fun onStop() {
+        super.onStop()
+        presenter.setSyncIsFalse()
     }
 
-    fun secondSearch(query:String){
-        presenter.setQuery(query)
-        progress_bar.visibility = View.VISIBLE
+    override fun onDestroy() {
+        super.onDestroy()
+
     }
 
+    override fun onDetach() {
+        (activity as MainActivity).supportActionBar!!.title = "InkBook"
+        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+        (activity as MainActivity).supportActionBar!!.setDisplayShowHomeEnabled(false)
+        super.onDetach()
+    }
 }

@@ -5,7 +5,6 @@ import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.art.tattoosearch.App
 import com.art.tattoosearch.R
-import com.art.tattoosearch.presenter.FavItemPresenter
 import com.yarolegovich.discretescrollview.DiscreteScrollView
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer
 import kotlinx.android.synthetic.main.activity_image.*
@@ -25,9 +24,9 @@ import com.squareup.picasso.Target
 import java.io.File
 
 
-class ImageFavActivity : MvpAppCompatActivity(),ImgFavInterface,
+class ImageFavActivity : MvpAppCompatActivity(), ImgFavInterface,
     DiscreteScrollView.OnItemChangedListener<ImgFavAdapter.PhotoHolder>
-    , DiscreteScrollView.ScrollStateChangeListener<ImgFavAdapter.PhotoHolder>{
+    , DiscreteScrollView.ScrollStateChangeListener<ImgFavAdapter.PhotoHolder> {
 
 
     @Inject
@@ -36,10 +35,12 @@ class ImageFavActivity : MvpAppCompatActivity(),ImgFavInterface,
     @Inject
     @InjectPresenter
     lateinit var presenter: FavItemPresenter
+
     @ProvidePresenter
     internal fun providePresenter(): FavItemPresenter {
         return presenter
     }
+
     private var position = 0
 
 
@@ -49,14 +50,14 @@ class ImageFavActivity : MvpAppCompatActivity(),ImgFavInterface,
         setContentView(R.layout.activity_image)
         button_1.setImageResource(R.drawable.ic_delete_black_24dp)
 
-        listImg =  intent.getStringArrayListExtra("imgSavedList")
-        position = intent.getIntExtra("clickSavedPosition",0)
+        listImg = intent.getStringArrayListExtra("imgSavedList")
+        position = intent.getIntExtra("clickSavedPosition", 0)
         adapter.addItems(listImg)
+        presenter.setImgList(listImg)
         presenter.setPosition(position)
         setSupportActionBar(toolbar_img)
 
         supportActionBar!!.setDisplayShowTitleEnabled(false)
-
         toolbar_img.setNavigationIcon(com.art.tattoosearch.R.drawable.ic_arrow_back_white_24dp)
         toolbar_img.setNavigationOnClickListener {
             onBackPressed()
@@ -68,23 +69,22 @@ class ImageFavActivity : MvpAppCompatActivity(),ImgFavInterface,
                 .setPositiveButton("Да") { _, _ ->
                     removeImg()
                 }
-                .setNegativeButton("Нет"
+                .setNegativeButton(
+                    "Нет"
                 ) { dialog, _ -> dialog.cancel() }
             val alert = builder.create()
             alert.show()
-
-            presenter.delImg()
         }
 
-        button_2.setOnClickListener{
+        button_2.setOnClickListener {
             Picasso.with(baseContext)
-                .load(object :File("$PATH_FOR_IMG/${listImg[presenter.getPosition()]}"){})
+                .load(object : File("$PATH_FOR_IMG/${listImg[presenter.getPosition()]}") {})
                 .into(object : Target {
                     override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
                     }
 
                     override fun onBitmapFailed(errorDrawable: Drawable?) {
-                        Toast.makeText(baseContext,"Попробуйте еще раз", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(baseContext, "Попробуйте еще раз", Toast.LENGTH_SHORT).show()
                     }
 
                     override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
@@ -98,10 +98,11 @@ class ImageFavActivity : MvpAppCompatActivity(),ImgFavInterface,
                         intent.putExtra(Intent.EXTRA_STREAM, uri)
                         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                         intent.type = "image/jpg"
-                        startActivity(Intent.createChooser(intent,"Поделись"))
+                        startActivity(Intent.createChooser(intent, "Поделись"))
 
                     }
-                })        }
+                })
+        }
 
         picker.addOnItemChangedListener(this)
         picker.addScrollStateChangeListener(this)
@@ -115,14 +116,28 @@ class ImageFavActivity : MvpAppCompatActivity(),ImgFavInterface,
     }
 
     private fun removeImg() {
-        adapter.removeItem(position)
         presenter.delImg()
-        if(listImg.size==0)onBackPressed()
+    }
 
+    override fun updateAdapter(scrollPosition: Int) {
+        if (adapter.getListSize() == 1) onBackPressed()
+        else adapter.removeItem(scrollPosition)
     }
 
 
-    override fun onCurrentItemChanged(viewHolder: ImgFavAdapter.PhotoHolder?, adapterPosition: Int) {
+    override fun fileIsNotDel() {
+        Toast.makeText(this, "Не удалось удалить файл:(\nПопробуйте еще раз", Toast.LENGTH_SHORT)
+            .show()
+    }
+
+    override fun delIsError() {
+        Toast.makeText(this, "Ошибка удаления файла\nПопробуйте еще раз", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onCurrentItemChanged(
+        viewHolder: ImgFavAdapter.PhotoHolder?,
+        adapterPosition: Int
+    ) {
         presenter.setPosition(adapterPosition)
         position = adapterPosition
     }
@@ -144,13 +159,13 @@ class ImageFavActivity : MvpAppCompatActivity(),ImgFavInterface,
         invisibleButtons()
     }
 
-    fun visibleButtons(){
+    fun visibleButtons() {
         button_1.visibility = View.VISIBLE
         button_2.visibility = View.VISIBLE
 
     }
 
-    fun invisibleButtons(){
+    fun invisibleButtons() {
         button_1.visibility = View.INVISIBLE
         button_2.visibility = View.INVISIBLE
 

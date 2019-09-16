@@ -2,24 +2,19 @@ package com.art.tattoosearch.views.search.image
 
 import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
 import android.view.View
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.art.tattoosearch.App
 import com.art.tattoosearch.R
-import com.art.tattoosearch.REQUEST_PERMISSIONS_CODE
-import com.art.tattoosearch.models.Image
-import com.art.tattoosearch.presenter.ImgPresenter
+import com.art.tattoosearch.entities.ImageForView
 import com.squareup.picasso.Picasso
 import com.yarolegovich.discretescrollview.DiscreteScrollView
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer
 import kotlinx.android.synthetic.main.activity_image.*
-import kotlinx.android.synthetic.main.recycler_adapter_img.*
+import kotlinx.android.synthetic.main.img_card.*
 import javax.inject.Inject
 import android.graphics.drawable.Drawable
 import android.graphics.Bitmap
@@ -27,14 +22,18 @@ import android.net.Uri
 import android.provider.MediaStore
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.squareup.picasso.Target
+import com.tbruyelle.rxpermissions2.RxPermissions
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 
 
 class ImageActivity : MvpAppCompatActivity(), ImageViewInterface,
     DiscreteScrollView.OnItemChangedListener<ImgAdapter.PhotoHolder>,
-        DiscreteScrollView.ScrollStateChangeListener<ImgAdapter.PhotoHolder>
-{
+    DiscreteScrollView.ScrollStateChangeListener<ImgAdapter.PhotoHolder> {
 
-    private var listImg = arrayListOf<Image>()
+    private var listImg = arrayListOf<ImageForView>()
     @Inject
     lateinit var adapter: ImgAdapter
 
@@ -48,15 +47,16 @@ class ImageActivity : MvpAppCompatActivity(), ImageViewInterface,
     }
 
     private var position = 0
-
+    private val compositeDisposable = CompositeDisposable()
+    private val rxPermissions = RxPermissions(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         App.daggerMainComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image)
 
-        listImg =  intent.getParcelableArrayListExtra("imgList")
-        position = intent.getIntExtra("clickPosition",0)
+        listImg = intent.getParcelableArrayListExtra("imgList")
+        position = intent.getIntExtra("clickPosition", 0)
         adapter.addItems(listImg)
         presenter.setImgList(listImg)
         presenter.setPosition(position)
@@ -71,11 +71,19 @@ class ImageActivity : MvpAppCompatActivity(), ImageViewInterface,
 
 
         button_1.setOnClickListener {
-            if(checkPermission())
-            presenter.saveLikePosition(this,item_image_view)
-            else ActivityCompat.requestPermissions(this,
-                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                REQUEST_PERMISSIONS_CODE)
+            val permission = rxPermissions
+                .request(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { granted ->
+
+                    presenter.saveLikePosition(item_image_view)
+
+                }
+            compositeDisposable.add(permission)
 
         }
 
@@ -87,7 +95,7 @@ class ImageActivity : MvpAppCompatActivity(), ImageViewInterface,
                     }
 
                     override fun onBitmapFailed(errorDrawable: Drawable?) {
-                        Toast.makeText(baseContext,"Попробуйте еще раз",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(baseContext, "Попробуйте еще раз", Toast.LENGTH_SHORT).show()
                     }
 
                     override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
@@ -101,7 +109,7 @@ class ImageActivity : MvpAppCompatActivity(), ImageViewInterface,
                         intent.putExtra(Intent.EXTRA_STREAM, uri)
                         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                         intent.type = "image/jpg"
-                        startActivity(Intent.createChooser(intent,"Поделись"))
+                        startActivity(Intent.createChooser(intent, "Поделись"))
 
                     }
                 })
@@ -134,34 +142,6 @@ class ImageActivity : MvpAppCompatActivity(), ImageViewInterface,
         button_1.isActivated = true
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when (requestCode) {
-
-            REQUEST_PERMISSIONS_CODE -> {
-                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    presenter.saveLikePosition(this,item_image_view)
-
-                } else {
-                    Toast.makeText(this,"Для работы приложения необходим доступ к чтению и записи данных", Toast.LENGTH_SHORT).show()
-                }
-                return
-            }
-
-        }
-
-    }
-
-
-
-    private fun checkPermission():Boolean{
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            != PackageManager.PERMISSION_GRANTED) {
-            return false
-        }
-
-        return true
-    }
     override fun onScrollEnd(currentItemHolder: ImgAdapter.PhotoHolder, adapterPosition: Int) {
         button_1.visibility = View.VISIBLE
         button_2.visibility = View.VISIBLE
@@ -180,5 +160,4 @@ class ImageActivity : MvpAppCompatActivity(), ImageViewInterface,
         newCurrent: ImgAdapter.PhotoHolder?
     ) {
     }
-
 }

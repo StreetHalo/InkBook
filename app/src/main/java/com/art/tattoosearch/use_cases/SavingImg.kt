@@ -1,4 +1,4 @@
-package com.art.tattoosearch.models
+package com.art.tattoosearch.use_cases
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
@@ -9,11 +9,11 @@ import com.squareup.picasso.Target
 import java.io.File
 import java.io.FileOutputStream
 
-open class SavingImg(var name :String, private val imageView: ImageView ):Target {
+open class SavingImg(var name: String, private val imageView: ImageView) : Target {
 
-        init {
-            name = name.substring(name.indexOf("=tbn:")+5)
-        }
+    init {
+        name = name.substring(name.indexOf("=tbn:") + 5)
+    }
 
     override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
 
@@ -43,5 +43,6 @@ open class SavingImg(var name :String, private val imageView: ImageView ):Target
             ostream.close()
             imageView.setImageBitmap(bitmap)
         } catch (e: Exception) {
-        }    }
+        }
+    }
 }
