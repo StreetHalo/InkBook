@@ -18,7 +18,7 @@ For work with HTTP requests, MVP pattern and dependency injections:<br />
 
 ### Screenshots
 <p float="left">
-  <img src="https://lh3.googleusercontent.com/uNpjtAdKyu_J8b_2G7AZnbZ0B7uK-uY0vYCFEu_3TPVhGjwGP3umFd4C49gyYa3zh4tE=w2560-h1156-rw" width="250" />
+  <img src="https://github.com/StreetHalo/InkBook/blob/master/photo_2019-09-27_00-06-30%20(2).jpg?raw=true" width="250" />
   <img src="https://lh3.googleusercontent.com/bkLcoEYjsfucSSbLb02NNTl_pwKZpuSRXzJmQgLqwR_uNfJ4vK-O-qgCZcCG0c_kYw=w2560-h1156-rw" width="250" /> 
-  <img src="https://lh3.googleusercontent.com/zJa5KTa0qmcDcjmytM49GfPOn1NtRm3cHmT5lac63c8fv0XdFQC68fVhBwpv0QQmPAM=w2560-h1156-rw" width="250" />
+  <img src="https://github.com/StreetHalo/InkBook/blob/master/photo_2019-09-27_00-06-30.jpg" width="250" />
 </p>
