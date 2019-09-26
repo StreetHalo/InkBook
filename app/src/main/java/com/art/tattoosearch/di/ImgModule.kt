@@ -1,4 +1,4 @@
-package com.art.tattoosearch.DI
+package com.art.tattoosearch.di
 
 import android.content.Context
 import com.art.tattoosearch.interactors.ImgInteractor

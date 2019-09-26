@@ -1,4 +1,4 @@
-package com.art.tattoosearch.DI
+package com.art.tattoosearch.di
 
 import com.art.tattoosearch.URL
 import com.art.tattoosearch.interactors.ImgInteractor
@@ -11,7 +11,6 @@ import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
 @Module
 open class GalleryModule() {

@@ -1,4 +1,4 @@
-package com.art.tattoosearch.DI
+package com.art.tattoosearch.di
 
 import com.art.tattoosearch.views.main.MainActivity
 import com.art.tattoosearch.views.favorite.gallery.FavFragment
@@ -7,7 +7,6 @@ import com.art.tattoosearch.views.search.image.ImageActivity
 import com.art.tattoosearch.views.search.gallery.GalleryFragment
 import com.art.tattoosearch.views.splash.SplashActivity
 import dagger.Component
-import javax.inject.Singleton
 
 @Component(
     modules = arrayOf(

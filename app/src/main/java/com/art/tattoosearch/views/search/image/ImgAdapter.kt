@@ -1,10 +1,9 @@
 package com.art.tattoosearch.views.search.image
 
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.art.tattoosearch.R
 import com.art.tattoosearch.entities.ImageForView
 import com.squareup.picasso.Picasso
@@ -40,7 +39,7 @@ class ImgAdapter : RecyclerView.Adapter<ImgAdapter.PhotoHolder>() {
     }
 
 
-    inner class PhotoHolder(itemView: View) : ViewHolder(itemView) {
+    inner class PhotoHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun setImg(item: ImageForView) {
 
 

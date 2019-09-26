@@ -14,9 +14,9 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.provider.MediaStore
-import android.support.v7.app.AlertDialog
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.art.tattoosearch.PATH_FOR_IMG
 import com.squareup.picasso.Picasso

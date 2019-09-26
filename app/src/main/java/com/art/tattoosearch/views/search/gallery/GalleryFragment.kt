@@ -4,13 +4,11 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.art.tattoosearch.R
 import kotlinx.android.synthetic.main.gallery_fragment.*
-import android.support.v7.widget.RecyclerView
 import android.text.method.LinkMovementMethod
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -21,10 +19,12 @@ import com.art.tattoosearch.entities.Item
 import com.art.tattoosearch.views.search.image.ImageActivity
 import javax.inject.Inject
 import android.content.DialogInterface
-import android.support.v7.app.AlertDialog
 import android.util.TypedValue
 import android.view.Gravity
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.art.tattoosearch.SEARCH_ITEM
 import com.art.tattoosearch.views.main.MainActivity
 
@@ -54,12 +54,13 @@ class GalleryFragment : MvpAppCompatFragment(), SearchViewInterface {
         return inflater.inflate(R.layout.gallery_fragment, container, false)
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         App.daggerMainComponent.inject(this)
         adapter.setView(this)
         //presenter.setQuery(arguments!!.getString("query"))
         super.onAttach(context)
     }
+
 
     override fun onResume() {
         super.onResume()

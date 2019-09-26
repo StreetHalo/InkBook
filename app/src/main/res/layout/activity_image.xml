@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             app:dsv_orientation="horizontal" />
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_img"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

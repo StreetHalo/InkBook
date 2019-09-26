@@ -1,10 +1,10 @@
 package com.art.tattoosearch
 
 import android.app.Application
-import com.art.tattoosearch.DI.DaggerMainComponent
-import com.art.tattoosearch.DI.ImgModule
-import com.art.tattoosearch.DI.MainComponent
-import com.art.tattoosearch.DI.MainModule
+import com.art.tattoosearch.di.DaggerMainComponent
+import com.art.tattoosearch.di.ImgModule
+import com.art.tattoosearch.di.MainComponent
+import com.art.tattoosearch.di.MainModule
 
 class App : Application() {
 

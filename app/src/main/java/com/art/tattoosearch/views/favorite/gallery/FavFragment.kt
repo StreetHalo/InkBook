@@ -3,8 +3,6 @@ package com.art.tattoosearch.views.favorite.gallery
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.art.tattoosearch.App
@@ -15,6 +13,8 @@ import kotlinx.android.synthetic.main.fav_gallery_fragment.*
 import javax.inject.Inject
 import android.view.*
 import android.view.MenuInflater
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.art.tattoosearch.views.main.MainActivity
 
@@ -43,12 +43,12 @@ class FavFragment : MvpAppCompatFragment(), FavViewInterface {
 
     }
 
-    override fun onAttach(context: Context?) {
+
+    override fun onAttach(context: Context) {
         App.daggerMainComponent.inject(this)
         super.onAttach(context)
         adapter.setView(this)
         setHasOptionsMenu(true)
-
     }
 
     override fun onResume() {

@@ -1,10 +1,9 @@
 package com.art.tattoosearch.views.favorite.item
 
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.art.tattoosearch.PATH_FOR_IMG
 import com.art.tattoosearch.R
 import com.squareup.picasso.Picasso
@@ -51,7 +50,7 @@ class ImgFavAdapter : RecyclerView.Adapter<ImgFavAdapter.PhotoHolder>() {
     }
 
 
-    inner class PhotoHolder(itemView: View) : ViewHolder(itemView) {
+    inner class PhotoHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun setImg(item: String) {
 
 

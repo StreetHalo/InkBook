@@ -1,4 +1,4 @@
-package com.art.tattoosearch.DI
+package com.art.tattoosearch.di
 
 import com.art.tattoosearch.repository.FolderManager
 import com.art.tattoosearch.views.splash.SplashPresenter

@@ -12,5 +12,6 @@
                         Повторите попытку позже, а что бы Вам не было скучно, можно <a href="https://www.youtube.com/watch?v=vlSR8Wlmpac">послушать музыку</a> </string>
     <string name="need_permissions">Для дальнейшей работы необходимо разрешение</string>
     <string name="splash_error">Произошла ошибка. Перезапустите приложение.</string>
+    <string name="title_activity_main2">Main2Activity</string>
 
 </resources>
